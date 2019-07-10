@@ -386,12 +386,13 @@ def byte_compile (py_files,
         log.info("writing byte-compilation script '%s'", script_name)
         if not dry_run:
             if script_fd is not None:
-                script = os.fdopen(script_fd, "w")
+                script = os.fdopen(script_fd, "w", encoding="utf-8")
             else:
-                script = open(script_name, "w")
+                script = open(script_name, "w", encoding="utf-8")
 
             with script:
                 script.write("""\
+# -*- encoding: utf-8 -*-
 from distutils.util import byte_compile
 files = [
 """)
